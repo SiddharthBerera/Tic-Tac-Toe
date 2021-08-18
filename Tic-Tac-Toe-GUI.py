@@ -3,6 +3,8 @@ import tkinter as tk
 window_1 = tk.Tk()
 window_1.title("Tic Tac Toe")
 
+start_button = tk.Button(text = "Start", font=('Courier',18,'normal'),fg='red', command = lambda: main())
+start_button.grid()
 
 #starting player is X
 player = "X"
@@ -75,19 +77,23 @@ def refresh():
         for j in range(0,3):
             board[i][j]["text"] = ""   
 
-
-#make display
-for i in range(0,3):
-    for j in range(0,3):
-        #makes each of the 9 sqaures in the grid a button 
-        board[i][j] = tk.Button(text = "", font = ("normal", 60, "normal"), width = 2, height = 1, command=lambda r=i, c=j: main_gameflow(r,c))
-        board[i][j].grid(row = i, column = j)
-
 label_1=tk.Label(text="It's X's Turn", font=("normal",22,"bold"))
-label_1.grid(row=3, column =1)
-
 button_1=tk.Button(text="Restart", font=("Courier",18,"normal"), fg="red",command=refresh)
-button_1.grid(row=4,column=1)
+
+def main():
+    global board
+    global label_1
+    global button_1
+
+    #make display
+    for i in range(0,3):
+        for j in range(0,3):
+            #makes each of the 9 sqaures in the grid a button 
+            board[i][j] = tk.Button(text = "", font = ("normal", 60, "normal"), width = 2, height = 1, command=lambda r=i, c=j: main_gameflow(r,c))
+            board[i][j].grid(row = i, column = j)
+
+    label_1.grid(row=3, column =1)
+    button_1.grid(row=4,column=1)
 
 #display_board()
 window_1.mainloop()
